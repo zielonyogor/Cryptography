@@ -1,20 +1,20 @@
 package rsa;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RSASystem {
-    int p, q; // Only 4-digit numbers needed
-    BigInteger n, phi, e;
+    private BigInteger n, phi, e, d;
 
     public RSASystem(int p,  int q) {
-        this.p = p;
-        this.q = q;
-
         this.n = BigInteger.valueOf(p).multiply(BigInteger.valueOf(q));
         this.phi = BigInteger.valueOf(p - 1).multiply(BigInteger.valueOf(q - 1));
 
         e = GenerateE();
+        System.out.println(n);
+        d = GeneratePrivateKey();
     }
 
     public BigInteger GenerateE() {
@@ -32,11 +32,23 @@ public class RSASystem {
         return e.modInverse(phi);
     }
 
-    public BigInteger EncryptMessage(BigInteger message) {
-        return message.modPow(e, n); // C = M^e mod n
+    public List<BigInteger> EncryptMessage(String message) {
+        List<BigInteger> encryptedMessage = new ArrayList<>();
+        for(char letter : message.toCharArray()) {
+            BigInteger asciValue = BigInteger.valueOf(letter);
+            encryptedMessage.add(asciValue.modPow(e, n)); // C = M^e mod n
+        }
+        return encryptedMessage;
     }
 
-    public BigInteger DecryptMessage(BigInteger ciphertext, BigInteger privateKey) {
-        return ciphertext.modPow(privateKey, n); // M = C^d mod n
+    public String DecryptMessage(List<BigInteger> ciphertext) {
+        StringBuilder decryptedMessage = new StringBuilder();
+        for(BigInteger number : ciphertext) {
+            int decryptedNumber = number.modPow(d, n).intValue(); // M = C^d mod n
+            decryptedMessage.append((char) decryptedNumber);
+        }
+        return decryptedMessage.toString();
     }
+
+
 }

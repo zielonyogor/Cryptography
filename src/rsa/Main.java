@@ -1,21 +1,20 @@
 package rsa;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        RSASystem rsa = new RSASystem(7487, 9803); // Small prime numbers
+        RSASystem rsa = new RSASystem(5101, 9803); // Small prime numbers
 
-        BigInteger message = BigInteger.valueOf(12);
+        String message = "Encrypt message test here";
 
-        BigInteger ciphertext = rsa.EncryptMessage(message);
+        List<BigInteger> ciphertext = rsa.EncryptMessage(message);
 
-        BigInteger privateKey = rsa.GeneratePrivateKey();
-        BigInteger decryptedMessage = rsa.DecryptMessage(ciphertext, privateKey);
+        String decryptedMessage = rsa.DecryptMessage(ciphertext);
 
         System.out.println("Original Message: " + message);
         System.out.println("Encrypted Message: " + ciphertext);
-        System.out.println("Private Key: " + privateKey);
         System.out.println("Decrypted Message: " + decryptedMessage);
     }
 }
