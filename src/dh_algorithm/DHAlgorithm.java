@@ -15,16 +15,16 @@ public class DHAlgorithm {
         g = BigInteger.valueOf(69);
     }
 
-    public void AddUser(String name, int number) {
+    public void addUser(String name, int number) {
         User newUser = new User(name, n, g);
 
         if(number == 1) firstUser = newUser;
         else secondUser = newUser;
     }
 
-    public void ExchangeKeys() {
-        firstUser.CalculateK(secondUser.GetX());
-        secondUser.CalculateK(firstUser.GetX());
+    public void exchangeKeys() {
+        firstUser.calculateK(secondUser.getX());
+        secondUser.calculateK(firstUser.getX());
     }
 }
 

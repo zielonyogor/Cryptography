@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FIPSTest {
-    public static boolean TestSingleBit(String bitStream) {
+    public static boolean testSingleBit(String bitStream) {
         int numberOfOnes = 0;
         for(char bit : bitStream.toCharArray()) {
             if(bit == '1') numberOfOnes++;
@@ -12,7 +12,7 @@ public class FIPSTest {
         return (numberOfOnes > 9725 && numberOfOnes < 10275);
     }
 
-    public static boolean TestSeries(String bitStream) {
+    public static boolean testSeries(String bitStream) {
         // Initialize dictionary for series
         Map<Integer, Integer> seriesLength = new HashMap<Integer, Integer>();
         seriesLength.put(2, 0);
@@ -58,7 +58,7 @@ public class FIPSTest {
         return true;
     }
 
-    public static boolean TestLongSeries(String bitStream) {
+    public static boolean testLongSeries(String bitStream) {
         char currentBit = 'X';
         int currentSeriesLength = 0;
 
@@ -82,7 +82,7 @@ public class FIPSTest {
         return true;
     }
 
-    public static boolean TestPoker(String bitStream) {
+    public static boolean testPoker(String bitStream) {
         int[] numberFrequencies = new int[16];
 
         for (int i = 0; i < bitStream.length(); i+= 4) {

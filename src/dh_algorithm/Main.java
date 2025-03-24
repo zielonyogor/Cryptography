@@ -4,9 +4,9 @@ public class Main {
     public static void main(String[] args) {
         DHAlgorithm dhAlgorithm = new DHAlgorithm();
 
-        dhAlgorithm.AddUser("A", 1);
-        dhAlgorithm.AddUser("B", 2);
+        dhAlgorithm.addUser("A", 1);
+        dhAlgorithm.addUser("B", 2);
 
-        dhAlgorithm.ExchangeKeys();
+        dhAlgorithm.exchangeKeys();
     }
 }

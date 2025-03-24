@@ -12,12 +12,12 @@ public class RSASystem {
         this.n = BigInteger.valueOf(p).multiply(BigInteger.valueOf(q));
         this.phi = BigInteger.valueOf(p - 1).multiply(BigInteger.valueOf(q - 1));
 
-        e = GenerateE();
+        e = generateE();
         System.out.println(n);
         d = GeneratePrivateKey();
     }
 
-    public BigInteger GenerateE() {
+    public BigInteger generateE() {
         Random rand = new Random();
         BigInteger value;
 
@@ -32,7 +32,7 @@ public class RSASystem {
         return e.modInverse(phi);
     }
 
-    public List<BigInteger> EncryptMessage(String message) {
+    public List<BigInteger> encryptMessage(String message) {
         List<BigInteger> encryptedMessage = new ArrayList<>();
         for(char letter : message.toCharArray()) {
             BigInteger asciValue = BigInteger.valueOf(letter);
@@ -41,7 +41,7 @@ public class RSASystem {
         return encryptedMessage;
     }
 
-    public String DecryptMessage(List<BigInteger> ciphertext) {
+    public String decryptMessage(List<BigInteger> ciphertext) {
         StringBuilder decryptedMessage = new StringBuilder();
         for(BigInteger number : ciphertext) {
             int decryptedNumber = number.modPow(d, n).intValue(); // M = C^d mod n

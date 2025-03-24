@@ -19,12 +19,12 @@ public class User {
         this.name = name;
     }
 
-    public BigInteger GetX() {
+    public BigInteger getX() {
         System.out.println(name + " gives an X = " + g.modPow(BigInteger.valueOf(privateKey), n));
         return g.modPow(BigInteger.valueOf(privateKey), n);
     }
 
-    public void CalculateK(BigInteger x) {
+    public void calculateK(BigInteger x) {
         BigInteger k = x.modPow(BigInteger.valueOf(privateKey), n);
         System.out.println(name + " calculated K = " + k);
     }

@@ -9,9 +9,9 @@ public class Main {
 
         String message = "Encrypt message test here";
 
-        List<BigInteger> ciphertext = rsa.EncryptMessage(message);
+        List<BigInteger> ciphertext = rsa.encryptMessage(message);
 
-        String decryptedMessage = rsa.DecryptMessage(ciphertext);
+        String decryptedMessage = rsa.decryptMessage(ciphertext);
 
         System.out.println("Original Message: " + message);
         System.out.println("Encrypted Message: " + ciphertext);

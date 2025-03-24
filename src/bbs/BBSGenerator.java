@@ -12,8 +12,8 @@ public class BBSGenerator {
         outputlength = n;
     }
 
-    public String GetBBSOutput() {
-        BigInteger x = GetSeed(m);
+    public String getBBSOutput() {
+        BigInteger x = getSeed(m);
         x = x.multiply(x).mod(m);
         StringBuilder bitOutput = new StringBuilder();
         for (int i = 0; i < outputlength; i++) {
@@ -23,7 +23,7 @@ public class BBSGenerator {
         return bitOutput.toString();
     }
 
-    public static BigInteger GetSeed(BigInteger m) {
+    public static BigInteger getSeed(BigInteger m) {
         Random rand = new Random();
         BigInteger seed;
 
