@@ -11,7 +11,7 @@
 
 3. Zaimplementuj generator BBS.
 
-   Implementacja generatora BBS jest w klasie [BBSGenerator](.\BBSGenerator.java)
+   Implementacja generatora BBS jest w klasie [BBSGenerator](BBSGenerator.java)
 
 4. Wygeneruj ciąg 20 000 bitów.
 
