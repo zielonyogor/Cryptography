@@ -15,12 +15,12 @@ public class FIPSTest {
     public static boolean TestSeries(String bitStream) {
         // Initialize dictionary for series
         Map<Integer, Integer> seriesLength = new HashMap<Integer, Integer>();
-        seriesLength.put(1, 0);
         seriesLength.put(2, 0);
         seriesLength.put(3, 0);
         seriesLength.put(4, 0);
         seriesLength.put(5, 0);
-        seriesLength.put(6, 0); // 6 or more
+        seriesLength.put(6, 0);
+        seriesLength.put(7, 0); // 6 or more
 
         char currentBit = 'X';
         int currentSeriesLength = 0;
@@ -32,7 +32,8 @@ public class FIPSTest {
             }
 
             if(bit != currentBit) {
-                int key = Math.min(currentSeriesLength, 6); // cap at 6
+                if(currentSeriesLength == 1) continue;
+                int key = Math.min(currentSeriesLength, 7); // cap at 6
                 seriesLength.put(key, seriesLength.get(key) + 1);
                 currentBit = bit;
                 currentSeriesLength = 1; // Reset series length
@@ -46,12 +47,12 @@ public class FIPSTest {
         int key = Math.min(currentSeriesLength, 6); // cap at 6
         seriesLength.put(key, seriesLength.get(key) + 1);
 
-        if(seriesLength.get(1) < 2315 || seriesLength.get(1) > 2685) return false;
-        if(seriesLength.get(2) < 1114 || seriesLength.get(2) > 1386) return false;
-        if(seriesLength.get(3) < 527 || seriesLength.get(3) > 723) return false;
-        if(seriesLength.get(4) < 240 || seriesLength.get(4) > 384) return false;
-        if(seriesLength.get(5) < 103 || seriesLength.get(5) > 209) return false;
+        if(seriesLength.get(2) < 2315 || seriesLength.get(2) > 2685) return false;
+        if(seriesLength.get(3) < 1114 || seriesLength.get(3) > 1386) return false;
+        if(seriesLength.get(4) < 527 || seriesLength.get(4) > 723) return false;
+        if(seriesLength.get(5) < 240 || seriesLength.get(5) > 384) return false;
         if(seriesLength.get(6) < 103 || seriesLength.get(6) > 209) return false;
+        if(seriesLength.get(7) < 103 || seriesLength.get(7) > 209) return false;
 
         return true;
     }

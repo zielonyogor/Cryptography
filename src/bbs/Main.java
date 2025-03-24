@@ -12,8 +12,6 @@ public class Main {
         BBSGenerator generator = new BBSGenerator(p, q, n);
         String bitOutput = generator.GetBBSOutput();
 
-//        System.out.println("Output: ");
-//        System.out.println(bitOutput);
         OutputFileWriter.WriteOutput("bbs_output.txt" ,bitOutput);
 
         System.out.println("Result of Single Bit Test: " + FIPSTest.TestSingleBit(bitOutput));

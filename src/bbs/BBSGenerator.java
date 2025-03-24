@@ -14,6 +14,7 @@ public class BBSGenerator {
 
     public String GetBBSOutput() {
         BigInteger x = GetSeed(m);
+        x = x.multiply(x).mod(m);
         StringBuilder bitOutput = new StringBuilder();
         for (int i = 0; i < outputlength; i++) {
             x = x.multiply(x).mod(m);  // x = (x^2) mod m
