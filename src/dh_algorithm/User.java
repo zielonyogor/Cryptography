@@ -6,7 +6,10 @@ import java.util.Random;
 public class User {
     String name;
     BigInteger n, g;
-    private int privateKey;
+    final private int privateKey; // x
+
+    public BigInteger publicKey;
+    public BigInteger sharedValue; // here we are giving values from other users
 
     public User(String name, BigInteger n, BigInteger g) {
         Random random = new Random();
@@ -19,13 +22,17 @@ public class User {
         this.name = name;
     }
 
-    public BigInteger getX() {
-        System.out.println(name + " gives an X = " + g.modPow(BigInteger.valueOf(privateKey), n));
-        return g.modPow(BigInteger.valueOf(privateKey), n);
+    public void setX() {
+        publicKey = g.modPow(BigInteger.valueOf(privateKey), n);
     }
 
-    public void calculateK(BigInteger x) {
-        BigInteger k = x.modPow(BigInteger.valueOf(privateKey), n);
-        System.out.println(name + " calculated K = " + k);
+    public BigInteger getX() {
+        System.out.println(name + " gives an X = " + publicKey);
+        return publicKey;
+    }
+
+    public void calculateK() {
+        publicKey = sharedValue.modPow(BigInteger.valueOf(privateKey), n);
+        System.out.println(name + " calculated K = " + publicKey);
     }
 }

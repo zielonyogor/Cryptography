@@ -19,11 +19,34 @@ public class DHAlgorithm {
 
     public void addUser(String name) {
         User newUser = new User(name, n, g);
-        // TODO
+        encryptionUsers.add(newUser);
     }
 
     public void exchangeKeys() {
-        // TODO
+        int listLength = encryptionUsers.size();
+        System.out.println("\nSetting first values\n");
+        for(User user : encryptionUsers) {
+            user.setX();
+        }
+
+        for (int i = 0; i < listLength - 1; i++) {
+            System.out.println("---------------- Iteration: " + i + " ---------------");
+            for (int j = 0; j < listLength; j++) {
+                System.out.print(encryptionUsers.get(j).name + ": ");
+                encryptionUsers.get(j).sharedValue = encryptionUsers.get((j + listLength - 1) % listLength).getX(); // exchanging values
+            }
+
+            for(User user : encryptionUsers) {
+                user.calculateK(); // calculating new values
+            }
+
+            System.out.println();
+        }
+
+        System.out.println("Final values: ");
+        for(User user : encryptionUsers) {
+            System.out.println(user.name + " - " + user.publicKey);
+        }
     }
 }
 

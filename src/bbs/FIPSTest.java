@@ -14,13 +14,20 @@ public class FIPSTest {
 
     public static boolean testSeries(String bitStream) {
         // Initialize dictionary for series
-        Map<Integer, Integer> seriesLength = new HashMap<Integer, Integer>();
-        seriesLength.put(2, 0);
-        seriesLength.put(3, 0);
-        seriesLength.put(4, 0);
-        seriesLength.put(5, 0);
-        seriesLength.put(6, 0);
-        seriesLength.put(7, 0); // 7 or more
+        Map<Integer, Integer> seriesZeroLength = new HashMap<Integer, Integer>();
+        seriesZeroLength.put(1, 0);
+        seriesZeroLength.put(2, 0);
+        seriesZeroLength.put(3, 0);
+        seriesZeroLength.put(4, 0);
+        seriesZeroLength.put(5, 0);
+        seriesZeroLength.put(6, 0); // 6 or more
+        Map<Integer, Integer> seriesOneLength = new HashMap<Integer, Integer>();
+        seriesOneLength.put(1, 0);
+        seriesOneLength.put(2, 0);
+        seriesOneLength.put(3, 0);
+        seriesOneLength.put(4, 0);
+        seriesOneLength.put(5, 0);
+        seriesOneLength.put(6, 0); // 6 or more
 
         char currentBit = 'X';
         int currentSeriesLength = 0;
@@ -32,9 +39,13 @@ public class FIPSTest {
             }
 
             if(bit != currentBit) {
-                if(currentSeriesLength == 1) continue;
-                int key = Math.min(currentSeriesLength, 7); // cap at 7
-                seriesLength.put(key, seriesLength.get(key) + 1);
+                int key = Math.min(currentSeriesLength, 6); // cap at 6
+                // Add to proper dictionary
+                if(currentBit == '0')
+                    seriesZeroLength.put(key, seriesZeroLength.get(key) + 1);
+                else
+                    seriesOneLength.put(key, seriesOneLength.get(key) + 1);
+
                 currentBit = bit;
                 currentSeriesLength = 1; // Reset series length
                 continue;
@@ -44,16 +55,23 @@ public class FIPSTest {
         }
 
         // Add last bit string
-        int key = Math.min(currentSeriesLength, 7); // cap at 7
+        int key = Math.min(currentSeriesLength, 6); // cap at 6
         if(currentSeriesLength != 1)
-            seriesLength.put(key, seriesLength.get(key) + 1);
+            seriesZeroLength.put(key, seriesZeroLength.get(key) + 1);
 
-        if(seriesLength.get(2) < 2315 || seriesLength.get(2) > 2685) return false;
-        if(seriesLength.get(3) < 1114 || seriesLength.get(3) > 1386) return false;
-        if(seriesLength.get(4) < 527 || seriesLength.get(4) > 723) return false;
-        if(seriesLength.get(5) < 240 || seriesLength.get(5) > 384) return false;
-        if(seriesLength.get(6) < 103 || seriesLength.get(6) > 209) return false;
-        if(seriesLength.get(7) < 103 || seriesLength.get(7) > 209) return false;
+        if(seriesZeroLength.get(1) < 2315 || seriesZeroLength.get(1) > 2685) return false;
+        if(seriesZeroLength.get(2) < 1114 || seriesZeroLength.get(2) > 1386) return false;
+        if(seriesZeroLength.get(3) < 527 || seriesZeroLength.get(3) > 723) return false;
+        if(seriesZeroLength.get(4) < 240 || seriesZeroLength.get(4) > 384) return false;
+        if(seriesZeroLength.get(5) < 103 || seriesZeroLength.get(5) > 209) return false;
+        if(seriesZeroLength.get(6) < 103 || seriesZeroLength.get(6) > 209) return false;
+
+        if(seriesOneLength.get(1) < 2315 || seriesOneLength.get(1) > 2685) return false;
+        if(seriesOneLength.get(2) < 1114 || seriesOneLength.get(2) > 1386) return false;
+        if(seriesOneLength.get(3) < 527 || seriesOneLength.get(3) > 723) return false;
+        if(seriesOneLength.get(4) < 240 || seriesOneLength.get(4) > 384) return false;
+        if(seriesOneLength.get(5) < 103 || seriesOneLength.get(5) > 209) return false;
+        if(seriesOneLength.get(6) < 103 || seriesOneLength.get(6) > 209) return false;
 
         return true;
     }

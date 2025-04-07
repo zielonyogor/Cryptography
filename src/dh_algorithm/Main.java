@@ -6,6 +6,8 @@ public class Main {
 
         dhAlgorithm.addUser("A");
         dhAlgorithm.addUser("B");
+        dhAlgorithm.addUser("C");
+        dhAlgorithm.addUser("D");
 
         dhAlgorithm.exchangeKeys();
     }
