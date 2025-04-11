@@ -1,9 +1,14 @@
 package hash;
 
+import utility.ConsoleFormatter;
+import utility.FileManager;
+
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -14,14 +19,39 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Message to hash");
+        // Get input from console or read from file
+        System.out.println("Would you like to insert input (0) or get from file (anything else)?");
         String inputMessage = scanner.nextLine();
 
-        System.out.println("Output:");
+        if(Objects.equals(inputMessage, "0"))
+        {
+            System.out.println("Message to hash");
+            inputMessage = scanner.nextLine();
+
+            System.out.println("Output:");
+            output(inputMessage);
+        }
+        else {
+            System.out.println("Output:\n");
+            ArrayList<String> messages = FileManager.readFile("hash_input.txt");
+
+            for(String message : messages) {
+                System.out.printf("Message   : %s%n", message);
+                output(message);
+                System.out.println();
+            }
+        }
+    }
+
+    private static void output(String input) {
         for(String algorithm : ALGORITHMS) {
             try {
-                String hash = hashMessage(inputMessage, algorithm);
+                long startTime = System.nanoTime();
+                String hash = hashMessage(input, algorithm);
+                long stopTime = System.nanoTime();
+
                 System.out.printf("%-10s: %s%n", algorithm, hash);
+                System.out.printf("Time      : %-8s (ns)%n", (stopTime - startTime));
             } catch (NoSuchAlgorithmException e) {
                 System.out.printf("%-10s: No support.%n", algorithm);
                 System.out.println("Error: " + e.getMessage());

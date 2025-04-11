@@ -1,23 +1,23 @@
 # Implementacja BBS i testów FIPS 140-2
 
-1. Przeanalizuj na podstawie podanej literatury jakie własności powinien posiadać
+### 1. Przeanalizuj na podstawie podanej literatury jakie własności powinien posiadać
    ciąg pseudolosowy.
 
     Powinien jak najlepiej przypominać prawdziwy ciąg losowy
 
-2. Jak testuje się losowość ciągów?
+### 2. Jak testuje się losowość ciągów?
 
    Testami statystycznymi. Sprawdza się rozkład cyfr, długość ich ciągu
 
-3. Zaimplementuj generator BBS.
+### 3. Zaimplementuj generator BBS.
 
    Implementacja generatora BBS jest w klasie [BBSGenerator](BBSGenerator.java)
 
-4. Wygeneruj ciąg 20 000 bitów.
+### 4. Wygeneruj ciąg 20 000 bitów.
 
    Wygenerowany ciąg bitów zapisany zostaje w `bbs_output.txt`
 
-5. Zaimplementuj przynajmniej 4 testy FIPS 140-2 i przebadaj wygenerowany
+### 5. Zaimplementuj przynajmniej 4 testy FIPS 140-2 i przebadaj wygenerowany
    wcześniej ciąg.
 
    <details>
@@ -33,6 +33,6 @@
    Result of Poker Test: true
    ```
 
-6. Zinterpretuj otrzymane wyniki.
+### 6. Zinterpretuj otrzymane wyniki.
 
    Dla dużych liczb `p` i `q` ciąg przechodzi wszystkie testy. Im mniejsze te liczby tym ciąg jest bardziej powtarzalny.

@@ -1,6 +1,6 @@
 package bbs;
 
-import utility.OutputFileWriter;
+import utility.FileManager;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,7 +12,7 @@ public class Main {
         BBSGenerator generator = new BBSGenerator(p, q, n);
         String bitOutput = generator.getBBSOutput();
 
-        OutputFileWriter.WriteOutput("bbs_output.txt" ,bitOutput);
+        FileManager.writeOutput("bbs_output.txt" ,bitOutput);
 
         System.out.println("Result of Single Bit Test: " + FIPSTest.testSingleBit(bitOutput));
         System.out.println("Result of Series Test: " + FIPSTest.testSeries(bitOutput));
