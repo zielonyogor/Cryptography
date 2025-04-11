@@ -25,9 +25,18 @@
    ```
       
 
-### 3. Wygeneruj skrót dla słowa wejściowego, nie dłuższego niż 4 znaki. Skopiuj wartość uzyskaną dla funkcji MD5 i sprawdź, czy wartość wejściowa jest powszechnie znana. Co można powiedzieć o bezpieczeństwie skrótów z krótkich haseł składowanych w bazach danych?
+### 3. Wygeneruj skrót dla słowa wejściowego, nie dłuższego niż 4 znaki. Skopiuj wartość uzyskaną dla funkcji MD5 i sprawdź, czy wartość wejściowa jest powszechnie znana.
+
+   Słowo wejściowe: `Ena` \
+   Wynik: `b7a16f02562d5c049a827d7cbdf4f704`
+
+### Co można powiedzieć o bezpieczeństwie skrótów z krótkich haseł składowanych w bazach danych?
+
+   Programy dekryptujące są w stanie szybko uzyskać wartość wejściową.
 
 ### 4. Na podstawie powszechnie dostępnych źródeł odpowiedz na pytanie – czy funkcję MD5 można uznać za bezpieczną? Czy dotychczas zostały znalezione dla niej jakiekolwiek kolizje?
+
+   Funkcja MD5 nie jest bezpieczna, nie jest odporna na kolizje. Z punktu wyżej również wiadomo, że nie jest nieodwracalna.
 
 ### 5. Dla wybranej przez siebie funkcji skrótu, zbadaj kolizje na pierwszych 12 bitach skrótu.
 
