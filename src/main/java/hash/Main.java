@@ -1,5 +1,6 @@
 package hash;
 
+import utility.ConsoleFormatter;
 import utility.FileManager;
 
 import java.nio.charset.StandardCharsets;
@@ -11,7 +12,9 @@ import java.util.Scanner;
 
 public class Main {
     private static final String[] ALGORITHMS = {
-            "MD5", "SHA-1", "SHA-256", "SHA-384"
+            "MD5", "SHA-1",
+            "SHA-224", "SHA-256", "SHA-384", "SHA-512", "SHA-512/224", "SHA-512/256",
+            "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"
     };
 
     public static void main(String[] args) {
@@ -44,7 +47,7 @@ public class Main {
             ArrayList<String> messages = FileManager.readFile("hash_input.txt");
 
             for(String message : messages) {
-                System.out.printf("Message   : %s%n", message);
+                System.out.printf("%sMessage      : %s%s%n", ConsoleFormatter.BLUE_BOLD_BRIGHT,message, ConsoleFormatter.RESET);
                 output(message);
                 System.out.println();
             }
@@ -54,12 +57,8 @@ public class Main {
     private static void output(String input) {
         for(String algorithm : ALGORITHMS) {
             try {
-                long startTime = System.nanoTime();
                 String hash = hashMessage(input, algorithm);
-                long stopTime = System.nanoTime();
-
-                System.out.printf("%-10s: %s%n", algorithm, hash);
-                System.out.printf("Time      : %-8s (ns)%n", (stopTime - startTime));
+                System.out.printf("%-13s: %s%n", algorithm, hash);
             } catch (NoSuchAlgorithmException e) {
                 System.out.printf("%-10s: No support.%n", algorithm);
                 System.out.println("Error: " + e.getMessage());
