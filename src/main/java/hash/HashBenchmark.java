@@ -3,6 +3,8 @@ package hash;
 import org.openjdk.jmh.annotations.*;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.util.concurrent.TimeUnit;
 
@@ -11,13 +13,28 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 public class HashBenchmark {
 
-    @Param({"Hello World!","Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas doloremque id delectus fugiat quisquam earum vitae reprehenderit obcaecati nisi vero qui repudiandae, voluptates nobis consectetur in debitis accusantium alias. Suscipit aut ut quo ipsa, quod beatae eligendi labore! Perferendis veniam magni cumque eaque eius vel sit ratione sed voluptates ipsa. Maiores ex possimus saepe at ipsam molestiae omnis tempora ipsum perferendis minus ratione, beatae molestias! Tempora, velit! Voluptatum illo suscipit iure ipsam beatae eos neque quis corrupti, fugiat recusandae in animi eum. Consectetur doloremque eum labore incidunt at. Quibusdam aliquam provident, doloremque doloribus necessitatibus veritatis sunt dignissimos excepturi numquam amet?"})
-    public String message;
+    @Param({
+            "hash_input_1.txt",
+            "hash_input_2.txt",
+            "hash_input_3.txt"
+    })
+    public String filename;
 
-    @Param({"MD5", "SHA-1",
-            "SHA-224", "SHA-256", "SHA-384", "SHA-512", "SHA-512/224", "SHA-512/256",
-            "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"})
+    @Param({
+            "SHA-256", "MD5", "SHA3-256"
+//            "MD5", "SHA-1",
+//            "SHA-224", "SHA-256", "SHA-384", "SHA-512", "SHA-512/224", "SHA-512/256",
+//            "SHA3-224", "SHA3-256", "SHA3-384", "SHA3-512"
+    })
     public String algorithm;
+
+    private String message;
+
+    @Setup(Level.Trial)
+    public void loadFile() throws Exception {
+        byte[] fileBytes = Files.readAllBytes(Paths.get(filename));
+        message = new String(fileBytes, StandardCharsets.UTF_8);
+    }
 
     @Benchmark
     public String hash() throws Exception {

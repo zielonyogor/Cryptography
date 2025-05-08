@@ -13,7 +13,7 @@ public class RSASystem {
         this.phi = BigInteger.valueOf(p - 1).multiply(BigInteger.valueOf(q - 1));
 
         e = generateE();
-        System.out.println(n);
+        //System.out.println(n);
         d = GeneratePrivateKey();
     }
 
