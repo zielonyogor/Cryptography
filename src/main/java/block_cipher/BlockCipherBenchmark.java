@@ -44,7 +44,7 @@ public class BlockCipherBenchmark {
         key = keyGenerator.generateKey();
 
         if (transformation.contains("CBC") || transformation.contains("CTR")) {
-            iv = new byte[16]; // 128-bit IV
+            iv = new byte[16];
             SecureRandom.getInstanceStrong().nextBytes(iv);
         }
 
